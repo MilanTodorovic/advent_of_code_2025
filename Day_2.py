@@ -11,25 +11,16 @@ def parse_file() -> list[range]:
 		return generators
 
 def test_pattern(id_to_test: str) -> int:
-	len_of_integer = len(id_to_test)
-	if len_of_integer%2 == 0:
-		ln = len_of_integer//2
-		for x in range(1,ln+1):
-			groups = batched(id_to_test, x)
-			if all(id_to_test[:x] == digit for digit in groups):
-				print("Integer macthes a pattern", id_to_test)
-				return int(id_to_test)
-		else:
-			# integer doesn't match any pattern
-			print("Integer dossn't macth any pattern", id_to_test)
-			return 0
-	else:
-		# odd number of digits must all be the same
-		pattern = id_to_test[0]
-		if all(pattern == digit for digit in id_to_test):
+	len_of_integer: int = len(id_to_test)
+	ln = len_of_integer//2
+	for x in range(1,ln+1):
+		groups = list(batched(id_to_test, x))
+		# print(groups)
+		if all(groups[0] == digit for digit in groups[1:]):
+			# print("Integer macthes a pattern", id_to_test)
 			return int(id_to_test)
-		else:
-			return 0
+	else:
+		return 0
 
 def part_one(generators: list[range]):
 	result: int = 0
@@ -43,7 +34,7 @@ def part_one(generators: list[range]):
 					result += i
 			else:
 				continue
-	print(f"{result=}")
+	print(f"Part one {result=}")
 
 def part_two(generators: list[range]):
 	result: int = 0
@@ -51,9 +42,10 @@ def part_two(generators: list[range]):
 		for i in generator:
 			str_i = str(i)
 			result += test_pattern(str_i)
-	print(f"{result=}")
+	print(f"Part two {result=}")
 
 if __name__ == "__main__":
 	ranges: list[range] = parse_file()
 	part_one(ranges) # 24157613387
-	part_two(ranges) # >>>
+	part_two(ranges) # 33832678380
+
