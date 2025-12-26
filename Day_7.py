@@ -26,8 +26,8 @@ def part_one_and_two(contents: list[str]):
 			moves.remove(to_remove.pop())
 		while len(to_update):
 			moves.add(to_update.pop())
-	print("Part One:", splits)
-	print("Part Two:", sum(paths.values()))
+	print("Part One:", splits) # 1566
+	print("Part Two:", sum(paths.values())) # 5921061943075
 
 
 if __name__ == '__main__':
